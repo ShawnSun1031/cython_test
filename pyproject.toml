@@ -1,0 +1,23 @@
+[project]
+name = "cython_test"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Chin-Hsuan Sun", email = "dicky10311111@gmail.com"},
+]
+dependencies = [
+    "Cython>=3.0.10",
+    "ipykernel>=6.29.4",
+    "numpy>=1.24.4",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
