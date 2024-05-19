@@ -17460,37 +17460,37 @@ static PyObject *__pyx_pf_11argmax_fast_argmax_1d(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("argmax_1d", 1);
 
-  /* "argmax_fast.pyx":8
- * def argmax_1d(double [::1] R):
+  /* "argmax_fast.pyx":9
  *     # initialize variables
- *     cdef Py_ssize_t N = R.shape[0]             # <<<<<<<<<<<<<<
- * 
- *     cdef Py_ssize_t i = 0
+ *     cdef:
+ *         Py_ssize_t N = R.shape[0]             # <<<<<<<<<<<<<<
+ *         Py_ssize_t i = 0
+ *         Py_ssize_t max_idx = 0
  */
   __pyx_v_N = (__pyx_v_R.shape[0]);
 
   /* "argmax_fast.pyx":10
- *     cdef Py_ssize_t N = R.shape[0]
- * 
- *     cdef Py_ssize_t i = 0             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t max_idx = 0
- *     cdef double current_max = 0.0
+ *     cdef:
+ *         Py_ssize_t N = R.shape[0]
+ *         Py_ssize_t i = 0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t max_idx = 0
+ *         double current_max = 0.0
  */
   __pyx_v_i = 0;
 
   /* "argmax_fast.pyx":11
- * 
- *     cdef Py_ssize_t i = 0
- *     cdef Py_ssize_t max_idx = 0             # <<<<<<<<<<<<<<
- *     cdef double current_max = 0.0
+ *         Py_ssize_t N = R.shape[0]
+ *         Py_ssize_t i = 0
+ *         Py_ssize_t max_idx = 0             # <<<<<<<<<<<<<<
+ *         double current_max = 0.0
  * 
  */
   __pyx_v_max_idx = 0;
 
   /* "argmax_fast.pyx":12
- *     cdef Py_ssize_t i = 0
- *     cdef Py_ssize_t max_idx = 0
- *     cdef double current_max = 0.0             # <<<<<<<<<<<<<<
+ *         Py_ssize_t i = 0
+ *         Py_ssize_t max_idx = 0
+ *         double current_max = 0.0             # <<<<<<<<<<<<<<
  * 
  *     # main loop
  */
@@ -17499,98 +17499,62 @@ static PyObject *__pyx_pf_11argmax_fast_argmax_1d(CYTHON_UNUSED PyObject *__pyx_
   /* "argmax_fast.pyx":15
  * 
  *     # main loop
- *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in range(N):
- *             if R[i] > current_max:
+ *     for i in range(N):             # <<<<<<<<<<<<<<
+ *         if R[i] > current_max:
+ *             max_idx = i
  */
-  {
-      #ifdef WITH_THREAD
-      PyThreadState *_save;
-      _save = NULL;
-      Py_UNBLOCK_THREADS
-      __Pyx_FastGIL_Remember();
-      #endif
-      /*try:*/ {
+  __pyx_t_1 = __pyx_v_N;
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
 
-        /* "argmax_fast.pyx":16
+    /* "argmax_fast.pyx":16
  *     # main loop
- *     with nogil:
- *         for i in range(N):             # <<<<<<<<<<<<<<
- *             if R[i] > current_max:
- *                 max_idx = i
+ *     for i in range(N):
+ *         if R[i] > current_max:             # <<<<<<<<<<<<<<
+ *             max_idx = i
+ *             current_max = R[i]
  */
-        __pyx_t_1 = __pyx_v_N;
-        __pyx_t_2 = __pyx_t_1;
-        for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
-          __pyx_v_i = __pyx_t_3;
+    __pyx_t_4 = __pyx_v_i;
+    __pyx_t_5 = ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_R.data) + __pyx_t_4)) ))) > __pyx_v_current_max);
+    if (__pyx_t_5) {
 
-          /* "argmax_fast.pyx":17
- *     with nogil:
- *         for i in range(N):
- *             if R[i] > current_max:             # <<<<<<<<<<<<<<
- *                 max_idx = i
- *                 current_max = R[i]
- */
-          __pyx_t_4 = __pyx_v_i;
-          __pyx_t_5 = ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_R.data) + __pyx_t_4)) ))) > __pyx_v_current_max);
-          if (__pyx_t_5) {
-
-            /* "argmax_fast.pyx":18
- *         for i in range(N):
- *             if R[i] > current_max:
- *                 max_idx = i             # <<<<<<<<<<<<<<
- *                 current_max = R[i]
+      /* "argmax_fast.pyx":17
+ *     for i in range(N):
+ *         if R[i] > current_max:
+ *             max_idx = i             # <<<<<<<<<<<<<<
+ *             current_max = R[i]
  * 
  */
-            __pyx_v_max_idx = __pyx_v_i;
+      __pyx_v_max_idx = __pyx_v_i;
 
-            /* "argmax_fast.pyx":19
- *             if R[i] > current_max:
- *                 max_idx = i
- *                 current_max = R[i]             # <<<<<<<<<<<<<<
+      /* "argmax_fast.pyx":18
+ *         if R[i] > current_max:
+ *             max_idx = i
+ *             current_max = R[i]             # <<<<<<<<<<<<<<
  * 
  *     return max_idx
  */
-            __pyx_t_4 = __pyx_v_i;
-            __pyx_v_current_max = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_R.data) + __pyx_t_4)) )));
+      __pyx_t_4 = __pyx_v_i;
+      __pyx_v_current_max = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_R.data) + __pyx_t_4)) )));
 
-            /* "argmax_fast.pyx":17
- *     with nogil:
- *         for i in range(N):
- *             if R[i] > current_max:             # <<<<<<<<<<<<<<
- *                 max_idx = i
- *                 current_max = R[i]
- */
-          }
-        }
-      }
-
-      /* "argmax_fast.pyx":15
- * 
+      /* "argmax_fast.pyx":16
  *     # main loop
- *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in range(N):
- *             if R[i] > current_max:
+ *     for i in range(N):
+ *         if R[i] > current_max:             # <<<<<<<<<<<<<<
+ *             max_idx = i
+ *             current_max = R[i]
  */
-      /*finally:*/ {
-        /*normal exit:*/{
-          #ifdef WITH_THREAD
-          __Pyx_FastGIL_Forget();
-          Py_BLOCK_THREADS
-          #endif
-          goto __pyx_L5;
-        }
-        __pyx_L5:;
-      }
+    }
   }
 
-  /* "argmax_fast.pyx":21
- *                 current_max = R[i]
+  /* "argmax_fast.pyx":20
+ *             current_max = R[i]
  * 
  *     return max_idx             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_6 = PyInt_FromSsize_t(__pyx_v_max_idx); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_6 = PyInt_FromSsize_t(__pyx_v_max_idx); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_r = __pyx_t_6;
   __pyx_t_6 = 0;
@@ -18708,7 +18672,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 15, __pyx_L1_error)
   __pyx_builtin___import__ = __Pyx_GetBuiltinName(__pyx_n_s_import); if (!__pyx_builtin___import__) __PYX_ERR(1, 100, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 141, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 156, __pyx_L1_error)

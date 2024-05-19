@@ -17,11 +17,15 @@ cnp.import_array()
 # We now need to fix a datatype for our arrays. I've used the variable
 # DTYPE for this, which is assigned to the usual NumPy runtime
 # type info object.
-DTYPE = np.float64
+# DTYPE = np.float64
 
 # "ctypedef" assigns a corresponding compile-time type to DTYPE_t. For
 # every type in the numpy module there's a corresponding compile-time
 # type with a _t-suffix.
+# ctypedef fused DTYPE_t:
+#    cnp.float64_t
+#    cnp.int64_t
+
 ctypedef cnp.float64_t DTYPE_t
 
 @cython.boundscheck(False)
@@ -39,6 +43,9 @@ def argmax_1d(cnp.ndarray[DTYPE_t, ndim=1] R):
     ##    if R[i] > current_max:
     ##        max_idx = i
     ##        current_max = R[i]
+    ## cdef arraybuffer_descr ab_descr = arraybuffer_descr((0), 'd')
+    #cdef cnp.npy_intp* dims = [0]
+    #cdef cnp.ndarray[cnp.int64_t, ndim=0] tmp = cnp.PyArray_EMPTY(1, dims, cnp.NPY_INT64, 0)
     cdef cnp.ndarray[cnp.int64_t, ndim=0] tmp = np.array(1, dtype=np.int64)
 
     return cnp.PyArray_ArgMax(R, 0, tmp)
